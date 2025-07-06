@@ -2,6 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const alimentoRoutes = require('./routes/alimentoRoutes');
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log('Origem da Requisição Recebida:', origin);
+};
+
+app.use(cors(corsOptions));
+
 const app = express();
 const whitelist = [
     'https://paulosouza.github.io', 
@@ -19,7 +26,6 @@ const corsOptions = {
   }
 };
 
-app.use(cors(corsOptions))
 app.use(express.json());
 app.use('/api', alimentoRoutes);
 
